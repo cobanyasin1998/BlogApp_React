@@ -3,48 +3,48 @@ import ReactDOM from "react-dom";
 import AppRouter from "./routers/AppRouter";
 import "./styles/main.scss";
 
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-const initialState = {
-  count: 0,
+const state = {
+  blogs: [
+    {
+      id: 1,
+      title: "Blog Title 1",
+      description: "Blog Description 1",
+      dateAdded: 0,
+    },
+  ],
+  auth: {
+    userid: 1,
+    username: "Yasin Çoban",
+    email: "cobanyasin1998@gmail.com",
+  },
 };
-const store = createStore((state = initialState, action) => {
+
+const blogState = [];
+
+const blogReducer = (state = blogState, action) => {
   switch (action.type) {
-    case "INCREMENT":
-      const incrementBy =
-        typeof action.incrementBy === "number" ? action.incrementBy : 1;
-      return {
-        count: state.count + incrementBy,
-      };
-
-    case "DECREMENT":
-      return {
-        count: state.count - 1,
-      };
-
     default:
       return state;
   }
-  return state;
-});
+};
+
+const authState = {
+};
+
+const authReducer = (state = authState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+const store = createStore(combineReducers({
+    blogs:blogReducer,
+    auth:authReducer
+}));
 
 console.log(store.getState());
-
-store.dispatch({
-  type: "INCREMENT",
-  incrementBy: 10,
-});
-store.dispatch({
-  type: "INCREMENT",
-});
-store.dispatch({
-  type: "DECREMENT",
-});
-
-store.subcribe(()=>{
-
-    console.log(store.getState());
-
-})
 
 ReactDOM.render(<AppRouter />, document.getElementById("root"));
