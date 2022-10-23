@@ -4,7 +4,6 @@ export default class BlogForm extends Component {
   state = {
     title: "",
     description: "",
-    dateAdded: Date.now(),
     error: "",
   };
 
@@ -23,13 +22,18 @@ export default class BlogForm extends Component {
       this.setState(() => ({ error: "Lütfen Tüm Alanları Doldurunuz." }));
     } else {
       this.setState(() => ({ error: "" }));
-      console.log("Submitted !! ");
+      this.props.onSubmit({
+        title: this.state.title,
+        description: this.state.description,
+        dateAdded: Date.now(),
+      });
     }
   };
 
   render() {
     return (
       <div>
+        {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.onSubmit}>
           <div>
             <input

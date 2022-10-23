@@ -5,6 +5,7 @@ import "./styles/main.scss";
 import configureStore from "./store/configure";
 import { Provider } from "react-redux";
 import { addBlog, removeBlog } from "./actions/blog";
+import './firebase/firebaseConfig';
 
 const store = configureStore();
 
