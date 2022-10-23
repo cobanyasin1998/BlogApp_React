@@ -1,0 +1,55 @@
+import React, { Component } from "react";
+
+export default class BlogForm extends Component {
+  state = {
+    title: "",
+    description: "",
+    dateAdded: Date.now(),
+    error: "",
+  };
+
+  onTitleChange = (e) => {
+    const title = e.target.value;
+    this.setState(() => ({ title }));
+  };
+  onDescriptionChange = (e) => {
+    const description = e.target.value;
+    this.setState(() => ({ description }));
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    if (!this.state.title || !this.state.description) {
+      this.setState(() => ({ error: "Lütfen Tüm Alanları Doldurunuz." }));
+    } else {
+      this.setState(() => ({ error: "" }));
+      console.log("Submitted !! ");
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <div>
+            <input
+              placeholder="Enter Title"
+              value={this.state.title}
+              onChange={this.onTitleChange}
+            />
+          </div>
+          <div>
+            <textarea
+              placeholder="Enter Description"
+              value={this.state.description}
+              onChange={this.onDescriptionChange}
+            ></textarea>
+          </div>
+          <div>
+            <button type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}

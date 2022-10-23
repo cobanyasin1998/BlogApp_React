@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import AppRouter from "./routers/AppRouter";
 import "./styles/main.scss";
 import configureStore from "./store/configure";
-
+import { Provider } from "react-redux";
 import { addBlog, removeBlog } from "./actions/blog";
 
 const store = configureStore();
@@ -32,4 +32,9 @@ store.dispatch(
   })
 );
 
-ReactDOM.render(<AppRouter />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>,
+  document.getElementById("root")
+);

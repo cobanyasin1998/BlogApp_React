@@ -11,7 +11,9 @@ const Header = () => {
       <NavLink exact to="/blogs" activeClassName="active">
         Blogs
       </NavLink>
-
+      <NavLink exact to="/create" activeClassName="active">
+        Create Blog
+      </NavLink>
       <NavLink exact to="/contact" activeClassName="active">
         Contact
       </NavLink>
